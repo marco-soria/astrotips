@@ -4,7 +4,8 @@ import Card from '../components/Card.astro';
 import Header from '../components/Header.astro';
 import Hero from '../components/Hero.astro';
 
-const allPosts = await Astro.glob("../content/*.md")
+import { getCollection } from 'astro:content';
+const allPosts = await getCollection('posts');
 ---
 
 <Layout title="Welcome to Astro.">
@@ -44,9 +45,9 @@ const allPosts = await Astro.glob("../content/*.md")
 		<ul role="list" class="link-card-grid">
 			{allPosts.map((item) => (
 				<Card
-				title={item?.frontmatter?.title}
-				time={item?.frontmatter?.pubDate}
-				tags={item?.frontmatter?.tags}
+				title={item?.data?.title}
+				time={item?.data?.pubDate}
+				tags={item?.data?.tags}
 			/>
 
 				))
